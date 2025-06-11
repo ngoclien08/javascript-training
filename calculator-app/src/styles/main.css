@@ -1,0 +1,86 @@
+@import url('./base/reset.css');
+@import url('./base/variables.css');
+@import url('./base/typography.css');
+
+body {
+  background-color: rgba(91, 165, 219, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calculator {
+  width: 193.14px;
+  height: 418px;
+  background-color: var(--color-bg-dark);
+  border-radius: 15px;
+  border: 3px solid #001E34;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.display {
+  flex: 1;
+  padding: 20px 10px 0 10px;
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.history {
+  font-size: var(--font-size-xs);
+  opacity: 0.7;
+}
+
+.result {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md);
+  line-height: 100%;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 48.28px);
+  grid-auto-rows: 39.65px;
+  gap: 0;
+  justify-content: center;
+}
+
+button img {
+  width: 11.66px;
+  height: 11.66px;
+  object-fit: contain;
+}
+
+.btn {
+  background-color: var(--color-bg-button);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid #001E34;
+  font-weight: 700;
+  font-size: 11.66px;
+  line-height: 100%;
+  cursor: pointer;
+}
+
+.btn:hover {
+  filter: brightness(1.1);
+}
+
+.operator {
+  color: var(--color-accent);
+}
+
+.equals {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  grid-row: span 2;
+}
+

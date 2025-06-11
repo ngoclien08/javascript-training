@@ -1,0 +1,33 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Reset body styles */
+body {
+  font-family: "Red Hat Display";
+  min-height: 100vh;
+  line-height: 1;
+}
+
+/* Reset button styles */
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Reset input styles */
+input {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* Ensure images scale properly */
+img {
+  max-width: 100%;
+  height: auto;
+}

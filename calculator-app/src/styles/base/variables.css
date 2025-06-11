@@ -1,0 +1,14 @@
+:root {
+  --font-family:'RedHatDisplay';
+  --color-bg-dark: #001E34;     
+  --color-bg-button: #002B4A;   
+  --color-accent: #FFA800;      
+  --color-white: #FFFFFF;
+
+  --font-weight-bold: 700;
+  --font-weight-medium: 500;
+
+  --font-size-xs: 11px;
+  --font-size-sm: 14px;
+  --font-size-md: 32px;
+}
