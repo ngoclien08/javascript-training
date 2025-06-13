@@ -8,6 +8,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden;
 }
 
 .calculator {
@@ -19,6 +20,23 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transform-origin: center center;
+  transform: scale(1);
+  transition: transform 0.2s ease;
+}
+
+/* Scale trên tablet */
+@media (min-width: 768px) {
+  .calculator {
+    transform: scale(1.3);
+  }
+}
+
+/* Scale trên desktop */
+@media (min-width: 1024px) {
+  .calculator {
+    transform: scale(1.5);
+  }
 }
 
 .display {
@@ -29,18 +47,25 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   text-align: right;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .history {
-  font-size: var(--font-size-xs);
-  opacity: 0.7;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+  margin-bottom: 10px;
 }
 
 .result {
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-md);
   line-height: 100%;
+  color: var(--color-white);
 }
 
 .buttons {
@@ -58,14 +83,15 @@ button img {
 }
 
 .btn {
+  font-family: var(--font-family);
   background-color: var(--color-bg-button);
   color: var(--color-white);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 0.5px solid #001E34;
+  border: 0.93px solid #001E34;
   font-weight: 700;
-  font-size: 11.66px;
+  font-size: var(--font-size-xs);
   line-height: 100%;
   cursor: pointer;
 }
@@ -80,7 +106,5 @@ button img {
 
 .equals {
   background-color: var(--color-accent);
-  color: var(--color-white);
   grid-row: span 2;
 }
-

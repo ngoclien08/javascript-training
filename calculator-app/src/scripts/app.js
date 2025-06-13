@@ -3,9 +3,8 @@ const history = document.getElementById('history');
 const buttons = document.querySelectorAll('.btn');
 
 let currentInput = '';
-let historyInput = '';
+let calculated = false;
 
-// Bắt sự kiện click trên từng nút
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     const value = button.getAttribute('data-value');
@@ -13,7 +12,7 @@ buttons.forEach(button => {
   });
 });
 
-// Hàm xử lý các loại input
+// Handle input based on value
 function handleInput(value) {
   if (value === 'C') {
     clearAll();
@@ -22,40 +21,46 @@ function handleInput(value) {
   } else if (value === '=') {
     calculateResult();
   } else {
+    if (calculated) {
+      currentInput = '';
+      calculated = false;
+    }
     currentInput += value;
-    result.textContent = currentInput;
+    updateHistoryOnly();
   }
 }
 
-// Hàm clear/reset
-function clearAll() {
-  currentInput = '';
-  historyInput = '';
+// Update the upper display line (history only)
+function updateHistoryOnly() {
+  history.textContent = currentInput;
   result.textContent = '0';
-  history.textContent = '';
 }
 
-// Hàm backspace
-function backspace() {
-  currentInput = currentInput.slice(0, -1);
-  result.textContent = currentInput || '0';
-}
-
-// Hàm tính kết quả
+// Calculate result when "=" is pressed
 function calculateResult() {
   try {
     const expression = currentInput
       .replace(/×/g, '*')
       .replace(/÷/g, '/');
-
     const evalResult = eval(expression);
-
-    historyInput = currentInput + ' =';
-    currentInput = evalResult.toString();
-
-    history.textContent = historyInput;
-    result.textContent = currentInput;
-  } catch (err) {
+    result.textContent = evalResult;
+    calculated = true;
+  } catch {
     result.textContent = 'Error';
   }
 }
+
+// Clear all input and reset display
+function clearAll() {
+  currentInput = '';
+  history.textContent = '';
+  result.textContent = '0';
+  calculated = false;
+}
+
+// Remove last character from input
+function backspace() {
+  currentInput = currentInput.slice(0, -1);
+  updateHistoryOnly();
+}
+

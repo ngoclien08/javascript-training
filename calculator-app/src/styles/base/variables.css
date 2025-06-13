@@ -1,9 +1,11 @@
 :root {
-  --font-family:'RedHatDisplay';
+  --font-family: 'Red Hat Display';
   --color-bg-dark: #001E34;     
   --color-bg-button: #002B4A;   
   --color-accent: #FFA800;      
   --color-white: #FFFFFF;
+  --color-gray-light: #EFEFEF;
+  
 
   --font-weight-bold: 700;
   --font-weight-medium: 500;
