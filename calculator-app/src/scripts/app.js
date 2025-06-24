@@ -25,6 +25,7 @@ function handleInput(value) {
       currentInput = '';
       calculated = false;
     }
+    // Thêm giá trị trực tiếp, không chèn khoảng cách
     currentInput += value;
     updateHistoryOnly();
   }
@@ -32,7 +33,7 @@ function handleInput(value) {
 
 // Update the upper display line (history only)
 function updateHistoryOnly() {
-  history.textContent = currentInput;
+  history.textContent = currentInput || '0'; // Hiển thị currentInput, không có khoảng cách
   result.textContent = '0';
 }
 
@@ -63,4 +64,3 @@ function backspace() {
   currentInput = currentInput.slice(0, -1);
   updateHistoryOnly();
 }
-
