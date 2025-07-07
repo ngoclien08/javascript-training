@@ -2,7 +2,7 @@ const result = document.getElementById('result');
 const history = document.getElementById('history');
 const buttons = document.querySelectorAll('.btn');
 
-let currentInput = '';
+let currentInput = '0'; 
 let calculated = false;
 
 buttons.forEach(button => {
@@ -22,18 +22,26 @@ function handleInput(value) {
     calculateResult();
   } else {
     if (calculated) {
-      currentInput = '';
+      if (!isNaN(value) && value !== '.') { 
+        currentInput = value;
+      } else { 
+        currentInput = result.textContent + value;
+      }
       calculated = false;
+    } else {
+      if (currentInput === '0' && !isNaN(value) && value !== '.') {
+        currentInput = value;
+      } else {
+        currentInput += value;
+      }
     }
-    currentInput += value;
     updateHistoryOnly();
   }
 }
 
 // Update the upper display line (history only)
 function updateHistoryOnly() {
-  history.textContent = currentInput || '0'; 
-  result.textContent = '0';
+  history.textContent = currentInput; 
 }
 
 // Calculate result when "=" is pressed
@@ -43,7 +51,7 @@ function calculateResult() {
       .replace(/×/g, '*')
       .replace(/÷/g, '/');
     const evalResult = eval(expression);
-    result.textContent = evalResult;
+    result.textContent = evalResult; 
     calculated = true;
   } catch {
     result.textContent = 'Error';
@@ -52,14 +60,18 @@ function calculateResult() {
 
 // Clear all input and reset display
 function clearAll() {
-  currentInput = '';
-  history.textContent = '';
+  currentInput = '0'; 
+  history.textContent = '0';
   result.textContent = '0';
   calculated = false;
 }
 
 // Remove last character from input
 function backspace() {
-  currentInput = currentInput.slice(0, -1);
+  if (currentInput.length > 1 || currentInput !== '0') {
+    currentInput = currentInput.slice(0, -1);
+  } else {
+    currentInput = '0'; 
+  }
   updateHistoryOnly();
 }
