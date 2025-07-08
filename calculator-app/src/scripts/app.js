@@ -2,18 +2,18 @@ const result = document.getElementById('result');
 const history = document.getElementById('history');
 const buttons = document.querySelectorAll('.btn');
 
-let currentInput = '0'; 
+let currentInput = '0';
 let calculated = false;
 
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     const value = button.getAttribute('data-value');
-    handleInput(value);
+    const buttonName = button.textContent.trim(); // Không cần xử lý icon nữa
+    handleInput(value, buttonName);
   });
 });
 
-// Handle input based on value
-function handleInput(value) {
+function handleInput(value, buttonName) {
   if (value === 'C') {
     clearAll();
   } else if (value === '⌫') {
@@ -22,9 +22,9 @@ function handleInput(value) {
     calculateResult();
   } else {
     if (calculated) {
-      if (!isNaN(value) && value !== '.') { 
+      if (!isNaN(value) && value !== '.') {
         currentInput = value;
-      } else { 
+      } else {
         currentInput = result.textContent + value;
       }
       calculated = false;
@@ -36,42 +36,41 @@ function handleInput(value) {
       }
     }
     updateHistoryOnly();
+    console.log(`Button clicked: ${buttonName}, Value: ${value}`);
   }
 }
 
-// Update the upper display line (history only)
 function updateHistoryOnly() {
-  history.textContent = currentInput; 
+  history.textContent = currentInput;
 }
 
-// Calculate result when "=" is pressed
 function calculateResult() {
   try {
     const expression = currentInput
       .replace(/×/g, '*')
-      .replace(/÷/g, '/');
+      .replace(/÷/g, '/')
+      .replace(/−/g, '-'); // chuyển dấu trừ unicode về chuẩn
+
     const evalResult = eval(expression);
-    result.textContent = evalResult; 
+    result.textContent = Number(evalResult.toFixed(10)).toString(); // làm tròn đẹp
     calculated = true;
   } catch {
     result.textContent = 'Error';
   }
 }
 
-// Clear all input and reset display
 function clearAll() {
-  currentInput = '0'; 
+  currentInput = '0';
   history.textContent = '0';
   result.textContent = '0';
   calculated = false;
 }
 
-// Remove last character from input
 function backspace() {
   if (currentInput.length > 1 || currentInput !== '0') {
     currentInput = currentInput.slice(0, -1);
   } else {
-    currentInput = '0'; 
+    currentInput = '0';
   }
   updateHistoryOnly();
 }
