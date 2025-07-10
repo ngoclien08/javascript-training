@@ -8,7 +8,7 @@ let calculated = false;
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     const value = button.getAttribute('data-value');
-    const buttonName = button.textContent.trim(); // Không cần xử lý icon nữa
+    const buttonName = button.textContent.trim(); 
     handleInput(value, buttonName);
   });
 });
@@ -41,7 +41,12 @@ function handleInput(value, buttonName) {
 }
 
 function updateHistoryOnly() {
-  history.textContent = currentInput;
+  // Thêm khoảng trắng giữa các toán tử và toán hạng
+  const formatted = currentInput
+    .replace(/([+\-×÷])/g, ' $1 ')   // Thêm khoảng trắng quanh + - × ÷
+    .replace(/\s+/g, ' ')            // Xoá khoảng trắng thừa
+    .trim();                         // Xoá khoảng trắng đầu/cuối
+  history.textContent = formatted;
 }
 
 function calculateResult() {
@@ -49,10 +54,10 @@ function calculateResult() {
     const expression = currentInput
       .replace(/×/g, '*')
       .replace(/÷/g, '/')
-      .replace(/−/g, '-'); // chuyển dấu trừ unicode về chuẩn
+      .replace(/−/g, '-'); 
 
     const evalResult = eval(expression);
-    result.textContent = Number(evalResult.toFixed(10)).toString(); // làm tròn đẹp
+    result.textContent = Number(evalResult.toFixed(10)).toString(); 
     calculated = true;
   } catch {
     result.textContent = 'Error';
