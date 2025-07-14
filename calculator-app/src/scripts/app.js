@@ -13,6 +13,7 @@ buttons.forEach(button => {
   });
 });
 
+// Handle input based on value
 function handleInput(value, buttonName) {
   if (value === 'C') {
     clearAll();
@@ -40,15 +41,16 @@ function handleInput(value, buttonName) {
   }
 }
 
+// Update the upper display line (history only)
 function updateHistoryOnly() {
-  // Thêm khoảng trắng giữa các toán tử và toán hạng
   const formatted = currentInput
-    .replace(/([+\-×÷])/g, ' $1 ')   // Thêm khoảng trắng quanh + - × ÷
-    .replace(/\s+/g, ' ')            // Xoá khoảng trắng thừa
-    .trim();                         // Xoá khoảng trắng đầu/cuối
+    .replace(/([+\-×÷])/g, ' $1 ')   
+    .replace(/\s+/g, ' ')            
+    .trim();                         
   history.textContent = formatted;
 }
 
+// Calculate result when "=" is pressed
 function calculateResult() {
   try {
     const expression = currentInput
@@ -64,6 +66,7 @@ function calculateResult() {
   }
 }
 
+// Clear all input and reset display
 function clearAll() {
   currentInput = '0';
   history.textContent = '0';
@@ -71,6 +74,7 @@ function clearAll() {
   calculated = false;
 }
 
+// Remove last character from input
 function backspace() {
   if (currentInput.length > 1 || currentInput !== '0') {
     currentInput = currentInput.slice(0, -1);

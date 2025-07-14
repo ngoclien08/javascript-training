@@ -16,8 +16,8 @@ body {
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: center; /* Đảm bảo căn giữa theo chiều ngang */
-  align-items: center; /* Đảm bảo căn giữa theo chiều dọc */
+  justify-content: center; 
+  align-items: center; 
   padding: 0;
   box-sizing: border-box;
   position: relative;
